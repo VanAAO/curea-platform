@@ -3,19 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AI powered Chat</title>
+    
+
     <title>iMessage-style Chat with Voice Input</title>
+
     <style>
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        background-color: #e5e5e5;
+        font-family: 'Poppins', sans-serif;
+        background-image: url("/assets/img/bck/img3.png");
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
         margin: 0;
       }
-
+      .navbar {
+            width: 100%;
+            padding: 10px 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+        }
+        .navbar .logo {
+            width: 120px;
+        }
       #container-box {
         background-color: #fff;
         width: 100%;
@@ -49,7 +63,7 @@
       }
 
       .user-message {
-        background-color: #007aff;
+        background-color: #0AB3DB;
         color: white;
         align-self: flex-end;
         border-bottom-right-radius: 5px;
@@ -81,7 +95,7 @@
       button {
         padding: 12px;
         font-size: 16px;
-        background-color: #007aff;
+        background-color: #337786;
         color: white;
         border: none;
         border-radius: 50%;
@@ -94,7 +108,7 @@
       }
 
       button:hover {
-        background-color: #0061c2;
+        background-color: #0AB3DB;
       }
 
       #mic-button {
@@ -133,6 +147,18 @@
         }
       }
     </style>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+          <div class="container px-4 px-lg-5">
+              <a href="home.html"><img src="\assets\img\logod.png" alt="logo"  width="100" height="100" class="d-inline-block align-text-top">
+              </a>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+              </div>
+          </div>
+      </nav>
+    </body>
+
   </head>
   <body>
     <div id="container-box">
@@ -234,5 +260,6 @@
         }
       });
     </script>
+
   </body>
 </html>

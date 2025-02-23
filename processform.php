@@ -6,25 +6,47 @@ $password = '';
 $dbname = 'cuedb';
 
 // Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    $response = [
-        'success' => false,
-        'message' => 'Connection failed: ' . $conn->connect_error
-    ];
-} else {
+    die("Connection failed".$conn->connect_error);
+} 
+echo "Connection Successfull";
+if (isset($_POST["submit"])) {
+    // Retrieve and sanitize form data
+    $fname = ($_POST['fname']);
+    $lname = ($_POST['lname']);
+    $email = ($_POST['email']);
+    $phone = ($_POST['phone']);
+
+    $sql = "select * from subscribers where username = '$fname', '$lname', '$email', '$phone'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $count = mysqli_num_rows($result);
+    if($count==1){
+        header("Location:processform.php")
+    }
+    else{
+        echo `<script>
+        window.location.href= "processform.php";
+        alert("Login failed. Invalid username or password")
+        </script>`
+    }
+}
+
+?>
+/*else {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve and sanitize form data
-        $fname = trim($_POST['fname']);
-        $lname = trim($_POST['lname']);
-        $email = trim($_POST['email']);
-        $phone = trim($_POST['phone']);
+        $fname = ($_POST['fname']);
+        $lname = ($_POST['lname']);
+        $email = ($_POST['email']);
+        $phone = ($_POST['phone']);
 
         // Validate email format
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
