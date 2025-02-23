@@ -39,6 +39,7 @@
         padding: 20px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
+
       #messages {
         flex: 1;
         overflow-y: auto;
@@ -48,6 +49,7 @@
         display: flex;
         flex-direction: column;
       }
+
       .message {
         max-width: 75%;
         padding: 12px 20px;
@@ -57,23 +59,27 @@
         line-height: 1.4;
         word-wrap: break-word;
       }
+
       .user-message {
         background-color: #0ab3db;
         color: white;
         align-self: flex-end;
         border-bottom-right-radius: 5px;
       }
+
       .bot-message {
         background-color: #f0f0f5;
         color: #333;
         align-self: flex-start;
         border-bottom-left-radius: 5px;
       }
+
       .input-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
+
       input[type="text"] {
         width: 70%;
         padding: 12px 20px;
@@ -83,6 +89,7 @@
         margin-right: 10px;
         background-color: #f0f0f5;
       }
+
       button {
         padding: 12px;
         font-size: 16px;
@@ -97,20 +104,25 @@
         justify-content: center;
         align-items: center;
       }
+
       button:hover {
         background-color: #0ab3db;
       }
+
       #mic-button {
         background-color: #ff3b30;
       }
+
       #mic-button.recording {
         background-color: #ff6b6b;
       }
+
       .typing-indicator {
         display: flex;
         align-self: flex-start;
         margin-bottom: 10px;
       }
+
       .typing-indicator span {
         width: 8px;
         height: 8px;
@@ -120,6 +132,7 @@
         display: inline-block;
         animation: typing 1.5s infinite;
       }
+
       @keyframes typing {
         0% {
           opacity: 0.3;
@@ -131,49 +144,35 @@
           opacity: 0.3;
         }
       }
-      /* New CSS for the resolutions & helpline link */
-      .resolutions-link {
-        text-align: center;
-        margin-top: 10px;
-      }
-      .resolutions-link a {
-        text-decoration: none;
-        color: #337786;
-        font-weight: bold;
-      }
-      .resolutions-link a:hover {
-        text-decoration: underline;
-      }
     </style>
+
+    <body>
+      <nav
+        class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+        id="mainNav"
+      >
+        <div class="container px-4 px-lg-5">
+          <a href="home.html"
+            ><img
+              src="\assets\img\logod.png"
+              alt="logo"
+              width="100"
+              height="100"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <div class="collapse navbar-collapse" id="navbarResponsive"></div>
+        </div>
+      </nav>
+    </body>
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
-      id="mainNav"
-    >
-      <div class="container px-4 px-lg-5">
-        <a href="home.html">
-          <img
-            src="\assets\img\logod.png"
-            alt="logo"
-            width="100"
-            height="100"
-            class="d-inline-block align-text-top"
-          />
-        </a>
-        <div class="collapse navbar-collapse" id="navbarResponsive"></div>
-      </div>
-    </nav>
     <div id="container-box">
       <div id="messages"></div>
       <div class="input-container">
         <input type="text" id="chat-input" placeholder="Type or speak..." />
         <button id="send-button">➤</button>
         <button id="mic-button">🎤</button>
-      </div>
-      <!-- New anchor tag for View Resolutions & Helpline -->
-      <div class="resolutions-link">
-        <a href="results.html">View Resolutions &amp; Helpline</a>
       </div>
     </div>
 
