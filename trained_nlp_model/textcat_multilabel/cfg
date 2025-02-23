@@ -2,7 +2,10 @@
   "labels":[
     "financial_support",
     "mental_health",
-    "employment"
+    "employment",
+    "low_mood",
+    "welfare_fund",
+    "conflict_resolution"
   ],
   "threshold":0.5
 }
