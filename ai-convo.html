@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iMessage-style Chat with Flask API</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background-color: #e5e5e5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #container-box {
+        background-color: #fff;
+        width: 100%;
+        max-width: 500px;
+        height: 90%;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      #messages {
+        flex: 1;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      .message {
+        max-width: 75%;
+        padding: 12px 20px;
+        border-radius: 20px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: inline-block;
+        line-height: 1.4;
+      }
+
+      .user-message {
+        background-color: #007aff;
+        color: white;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+      }
+
+      .cue-message {
+        background-color: #f0f0f5;
+        color: #333;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+      }
+
+      .input-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        width: 80%;
+        padding: 12px 20px;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        margin-right: 10px;
+        background-color: #f0f0f5;
+      }
+
+      button {
+        padding: 12px 15px;
+        font-size: 16px;
+        background-color: #007aff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 45px;
+        width: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      button:hover {
+        background-color: #0061c2;
+      }
+
+      .typing {
+        display: inline-block;
+        width: 50px;
+        height: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        animation: typing 1.5s infinite;
+      }
+
+      @keyframes typing {
+        0% {
+          width: 10px;
+        }
+        50% {
+          width: 50px;
+        }
+        100% {
+          width: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container-box">
+      <div id="messages"></div>
+      <div class="input-container">
+        <input type="text" id="chat-input" placeholder="Type something..." />
+        <button id="send-button">➤</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const chatInput = document.getElementById("chat-input");
+        const chatBox = document.getElementById("messages");
+        const sendButton = document.getElementById("send-button");
+
+        sendButton.addEventListener("click", function () {
+          let userMessage = chatInput.value;
+          if (!userMessage.trim()) return;
+
+          // Display user message in chat box
+          appendMessage("You", userMessage);
+
+          // Send request to Flask API
+          fetch("http://127.0.0.1:5000/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: userMessage, user_id: "12345" }), // Unique user ID
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              appendMessage("Chatbot", data.response); // Display chatbot response
+            })
+            .catch((error) => console.error("Error:", error));
+
+          chatInput.value = "";
+        });
+
+        // Function to append messages
+        function appendMessage(sender, message) {
+          let messageElement = document.createElement("div");
+          messageElement.classList.add("message");
+          if (sender === "You") {
+            messageElement.classList.add("user-message");
+          } else {
+            messageElement.classList.add("cue-message");
+          }
+
+          messageElement.textContent = message;
+          chatBox.appendChild(messageElement);
+          chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
+        }
+      });
+    </script>
+  </body>
+</html>
