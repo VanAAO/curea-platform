@@ -1,0 +1,8 @@
+{
+  "labels":[
+    "financial_support",
+    "mental_health",
+    "employment"
+  ],
+  "threshold":0.5
+}
