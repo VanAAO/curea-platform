@@ -20,7 +20,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;;
-            background-color: #f8f9fa;
+            background-image: url("/assets/img/bck/img3.png");
         }
 
         /* Navbar Styling */
@@ -130,7 +130,7 @@
                     <small class="error" id="termsError"></small>
                 </div>
 
-                <button type="submit" class="btn btn-submit" id="submitBtn" disabled>Subscribe</button>
+                <button type="submit" class="btn btn-submit" id="submitBtn">Subscribe</button>
             </form>
         </div>
     </div>
