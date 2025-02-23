@@ -1,68 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Curea</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/logo/favicon.ico" />
-        <!-- Bootstrap Icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- SimpleLightbox plugin CSS-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html"><img src="\assets\img\logod.png" alt="logo"  width="100" height="100" class="d-inline-block align-text-top">
-                </a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Welcome</h1>
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">It's our job to make sure you're alright...</p>
-                        <a class="btn btn-primary btn-xl" href="convo.html">Start</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-        
-        
-        <!-- Footer-->
-        <footer class="bg-light py-5">
-            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2025 - Powered by SKI <br> curea@rgu.ac.uk</div></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skills Card Result</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        height: 100vh; /* Full viewport height */
+        margin: 0; /* Remove default margin */
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9; /* Light background color for contrast */
+      }
+
+      .result-container {
+        display: flex;
+        flex-direction: column; /* Stack content vertically */
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        width: 40vw;
+        min-height: 30vh; /* Increased minimum height for better balance */
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff; /* White background for the result container */
+        color: #333; /* Dark text for better readability */
+      }
+
+      .content-container {
+        margin-top: 20px;
+        text-align: center; /* Center text inside content */
+        padding: 10px;
+        line-height: 1.6; /* Improved line height for better text spacing */
+        display: flex;
+        flex-direction: column; /* Stack image and text vertically */
+        align-items: center; /* Center all items horizontally */
+        justify-content: center; /* Vertically center items */
+      }
+
+      .content-container img {
+        width: 60px; /* Increased image size for better visibility */
+        height: 60px;
+        margin-bottom: 15px; /* Space below the image */
+        border-radius: 50%; /* Rounded image for better aesthetics */
+      }
+
+      .content-container h3 {
+        margin-top: 0; /* Remove extra margin for heading */
+        color: #2697b1; /* Slightly muted color for title */
+      }
+
+      .content-container p {
+        font-size: 16px; /* Slightly bigger font size for description */
+        color: #555; /* Lighter text color for description */
+      }
+
+      .to-do-next {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #2697b1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="result-container">
+      <h2>Your Resolution Card</h2>
+      <!-- This is where content will be displayed -->
+      <div id="content-container" class="content-container"></div>
+      <h4>To Do Next</h4>
+      <p class="to-do-next" id="to-do-next-content"></p>
+    </div>
+
+    <script>
+      const universalCredit = [
+        {
+          icon: "https://img.icons8.com/?size=100&id=C4eGu4dtEUDw&format=png&color=228BE6",
+          description:
+            "Based on our previous conversation, we believe that you are dealing with <strong> financial difficulties</strong>. Citizens Advice Scotland can guide you through the Universal Credit claiming process, from submitting your claim to checking your evidence and preparing for work coach appointments. They offer support for quick questions, setting up email and bank accounts, and ensuring you're ready for additional financial help.",
+          toDo: "Please call 0800 023 2581 on Monday - Friday from 8am - 6pm",
+        },
+      ];
+
+      const employment = [
+        {
+          icon: "https://img.icons8.com/?size=100&id=52233&format=png&color=228BE6",
+          description:
+            "Based on our conversation, it seems you’re looking to <strong> build confidence, knowledge, and skills to progress into employment, education, or training</strong>. ABZWorks offers tailored support for Aberdeen residents, delivering employability programs for individuals of all ages and backgrounds. Whether you're starting a new career or seeking redundancy advice, ABZWorks can help you achieve your goals.",
+          toDo: 'Visit <a href="https://abzworks.co.uk/" target="_blank" rel="noopener noreferrer">ABZWorks</a> for more information',
+        },
+      ];
+
+      const welfareFund = [
+        {
+          icon: "https://img.icons8.com/?size=100&id=34002&format=png&color=228BE6",
+          description:
+            "Based on our previous conversation, it seems you may be <strong> facing a crisis or need help to affording daily essentials</strong>. The Scottish Welfare Fund provides financial support to cover living costs in times of need. This is usually given as a one-off grant. The fund does not cover ongoing expenses, and the money does not need to be paid back. There are two types of grants available: <strong>Crisis grants</strong> to help with immediate needs like food, heating costs, nappies, toiletries, and travel, and <strong>Community care grants</strong> to help people settle into a new home or support families under exceptional pressure, for example by providing furniture or carpets.",
+          toDo: 'Apply online on <a href="https://www.aberdeencity.gov.uk/services/benefits-and-advice/apply-scottish-welfare-fund" target="_blank" rel="noopener noreferrer">Scottish Welfare Fund</a> or call <a href="tel:08000304713">0800 0304 713</a>',
+        },
+      ];
+
+      const breathingSpace = [
+        {
+          icon: "https://img.icons8.com/?size=100&id=2323&format=png&color=228BE6",
+          description:
+            "Based on our previous conversation, it seems that you may be experiencing <strong> mental health challenges such as stress, anxiety, or low mood</strong>. Breathing Space offers support for people in Scotland, helping you navigate these feelings and providing a safe space to talk.",
+          toDo: 'Apply online on <a href="https://www.breathingspace.scot/" target="_blank" rel="noopener noreferrer">Breathing Space Scots</a> or call <a href="tel:0800838587">0800 8385 87</a>',
+        },
+      ];
+
+      const SAMH = [
+        {
+          icon: "https://img.icons8.com/?size=100&id=zxpRXfB1FrB0&format=png&color=228BE6",
+          description:
+            "Based on the previous conversation, it seems that you might be experiencing a <strong> need for mental health support or information.</strong> The Scottish Action for Mental Health (SAMH) Information Service can assist you by providing valuable resources, support, and guidance for both yourself and others. Whether you're seeking advice, information, or just want to talk, the SAMH team is available to help.",
+          toDo: 'Visit <a href="https://www.samh.org.uk/informationservice" target="_blank" rel="noopener noreferrer">Scottish Action for Mental Health</a> for more information. or call <a href="tel:03448000550">0344 800 0550</a>',
+        },
+      ];
+
+      const conflictResolution = [
+        {
+          icon: "https://img.icons8.com/?size=100&id=ZkPSqr2mrrSP&format=png&color=228BE6",
+          description:
+            "Based on our previous conversation, it seems that you are <strong>dealing with conflict at home</strong>. If you're a young person facing these challenges, The Scottish Centre for Conflict Resolution (SCCR) is here for you. We provide guidance, consultation, and support to help you navigate and resolve conflict in a healthy way. Whether you need advice or are looking for strategies to manage difficult situations, we're here to help you find the support you need.",
+          toDo: 'Visit <a href="https://www.scottishconflictresolution.org.uk/young-people" target="_blank" rel="noopener noreferrer">Scottish Action for Mental Health</a>',
+        },
+      ];
+
+      // Function to display content dynamically
+      function displayResult() {
+        const contentData = conflictResolution[0]; // Get first item from the array
+
+        // Access the content container div
+        const contentContainer = document.getElementById("content-container");
+
+        // Insert the content dynamically
+        contentContainer.innerHTML = `
+          <div>
+            <img src="${contentData.icon}" alt="Universal Credit Icon" />
+            <p>${contentData.description}</p>
+          </div>
+        `;
+
+        // Access the To Do Next section and insert the dynamic content
+        const toDoNextContent = document.getElementById("to-do-next-content");
+        toDoNextContent.innerHTML = contentData.toDo;
+      }
+
+      // Call the function to display the content when the page loads
+      window.onload = displayResult;
+    </script>
+  </body>
 </html>
