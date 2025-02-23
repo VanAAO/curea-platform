@@ -1,0 +1,12 @@
+{
+  "labels":[
+    "financial_issue",
+    "mental_health",
+    "employment",
+    "low_mood",
+    "welfare_fund",
+    "conflict_resolution"
+  ],
+  "threshold":0.0,
+  "positive_label":null
+}
