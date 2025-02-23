@@ -24,18 +24,18 @@ if (isset($_POST["submit"])) {
     $email = ($_POST['email']);
     $phone = ($_POST['phone']);
 
-    $sql = "select * from subscribers where username = '$fname', '$lname', '$email', '$phone'";
+    $sql = "select * from subscribers where username = ('$fname', '$lname', '$email', '$phone')";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     $count = mysqli_num_rows($result);
     if($count==1){
         header("Location:processform.php")
-    }
-    else{
-        echo `<script>
+}    else{
+        echo 
+        <script>
         window.location.href= "processform.php";
         alert("Login failed. Invalid username or password")
-        </script>`
+        </script>
     }
 }
 
