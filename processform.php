@@ -1,62 +1,79 @@
 <?php
-// Enable error reporting
+
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'cuedb';
+
+// Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Database Connection
-$host = "localhost";
-$dbname = "cuedb";
-$username = "cue";
-$password = "curepass";
-
+// Create connection
 $conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
-}
+    $response = [
+        'success' => false,
+        'message' => 'Connection failed: ' . $conn->connect_error
+    ];
+} else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve and sanitize form data
+        $fname = trim($_POST['fname']);
+        $lname = trim($_POST['lname']);
+        $email = trim($_POST['email']);
+        $phone = trim($_POST['phone']);
 
-// Function to sanitize input
-function clean_input($data) {
-    return htmlspecialchars(stripslashes(trim($data)));
-}
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "Form Submitted!<br>";
-    print_r($_POST); // Debug form data
-
-    $first_name = clean_input($_POST["first_name"]);
-    $last_name = clean_input($_POST["last_name"]);
-    $email = clean_input($_POST["email"]);
-    $phone = clean_input($_POST["phone"]);
-
-    $errors = [];
-
-    // Validation
-    if (empty($first_name)) $errors[] = "First name is required.";
-    if (empty($last_name)) $errors[] = "Last name is required.";
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email format.";
-    if (empty($phone)) $errors[] = "Phone number is required.";
-
-    // If no errors, insert into DB
-    if (empty($errors)) {
-        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $first_name, $last_name, $email, $phone);
-
-        if ($stmt->execute()) {
-            echo "Registration successful!";
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $response = [
+                'success' => false,
+                'message' => 'Invalid email format'
+            ];
         } else {
-            echo "SQL Error: " . $stmt->error;
+            // Check if email already exists in the database
+            $stmt = $conn->prepare("SELECT * FROM subscribers WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows > 0) {
+                $response = [
+                    'success' => false,
+                    'message' => 'Email already exists'
+                ];
+            } else {
+                // Insert form data into the database
+                $stmt = $conn->prepare("INSERT INTO subscribers (fname, lname, email, phone) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $fname, $lname, $email, $phone);
+                
+                if ($stmt->execute()) {
+                    $response = [
+                        'success' => true,
+                        'message' => 'Subscription successful'
+                    ];
+                } else {
+                    $response = [
+                        'success' => false,
+                        'message' => 'Database error: ' . $conn->error
+                    ];
+                }
+            }
+            $stmt->close();
         }
-
-        $stmt->close();
     } else {
-        foreach ($errors as $error) {
-            echo "<p style='color:red;'>$error</p>";
-        }
+        $response = [
+            'success' => false,
+            'message' => 'Invalid request method'
+        ];
     }
+    $conn->close();
 }
-
-$conn->close();
+/*
+// Return JSON response
+header('Content-Type: application/json');
+echo json_encode($response);
+*/
 ?>

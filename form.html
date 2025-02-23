@@ -77,7 +77,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="home.html">
                 <img src="assets/img/logod.png" alt="logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -98,13 +98,13 @@
             <form id="contactForm" action="processform.php" method="POST">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First Name *</label>
-                    <input type="text" class="form-control" id="firstName" name="first_name" required>
+                    <input type="text" class="form-control" id="fname" name="fname" required>
                     <small class="error" id="firstNameError"></small>
                 </div>
 
                 <div class="mb-3">
                     <label for="lastName" class="form-label">Last Name *</label>
-                    <input type="text" class="form-control" id="lastName" name="last_name" required>
+                    <input type="text" class="form-control" id="lname" name="lname" required>
                     <small class="error" id="lastNameError"></small>
                 </div>
 
@@ -144,59 +144,60 @@
     <!-- Validation Script -->
     <script>
         const phoneInput = document.querySelector("#phone");
-        const intl = window.intlTelInput(phoneInput, {
-            initialCountry: "auto",
-            geoIpLookup: function(success, failure) {
-                fetch("https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN") 
-                    .then(response => response.json())
-                    .then(data => success(data.country))
-                    .catch(() => success("us"));
-            },
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-        });
+const intl = window.intlTelInput(phoneInput, {
+    initialCountry: "auto",
+    geoIpLookup: function(success, failure) {
+        fetch("https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN")
+            .then(response => response.json())
+            .then(data => success(data.country))
+            .catch(() => success("us"));
+    },
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+});
 
-        const form = document.getElementById("contactForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const termsCheckbox = document.getElementById("termsCheckbox");
+const form = document.getElementById("contactForm");
+const submitBtn = document.getElementById("submitBtn");
+const termsCheckbox = document.getElementById("termsCheckbox");
 
-        termsCheckbox.addEventListener("change", function() {
-            submitBtn.disabled = !this.checked;
-        });
+termsCheckbox.addEventListener("change", function() {
+    submitBtn.disabled = !this.checked;
+});
 
-        form.addEventListener("submit", function(event) {
-            let valid = true;
-            document.querySelectorAll(".error").forEach(el => el.textContent = "");
+form.addEventListener("submit", function(event) {
+    let valid = true;
+    document.querySelectorAll(".error").forEach(el => el.textContent = "");
 
-            if (document.getElementById("firstName").value.trim() === "") {
-                document.getElementById("firstNameError").textContent = "First name is required.";
-                valid = false;
-            }
+    if (document.getElementById("fname").value.trim() === "") {
+        document.getElementById("firstNameError").textContent = "First name is required.";
+        valid = false;
+    }
 
-            if (document.getElementById("lastName").value.trim() === "") {
-                document.getElementById("lastNameError").textContent = "Last name is required.";
-                valid = false;
-            }
+    if (document.getElementById("lname").value.trim() === "") {
+        document.getElementById("lastNameError").textContent = "Last name is required.";
+        valid = false;
+    }
 
-            const email = document.getElementById("email").value.trim();
-            if (!/^\S+@\S+\.\S+$/.test(email)) {
-                document.getElementById("emailError").textContent = "Enter a valid email.";
-                valid = false;
-            }
+    const email = document.getElementById("email").value.trim();
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById("emailError").textContent = "Enter a valid email.";
+        valid = false;
+    }
 
-            if (intl.getNumber() === "") {
-                document.getElementById("phoneError").textContent = "Enter a valid phone number.";
-                valid = false;
-            }
+    if (!intl.isValidNumber()) {
+        document.getElementById("phoneError").textContent = "Enter a valid phone number.";
+        valid = false;
+    }
 
-            if (!termsCheckbox.checked) {
-                document.getElementById("termsError").textContent = "You must agree to the Terms.";
-                valid = false;
-            }
+    if (!termsCheckbox.checked) {
+        document.getElementById("termsError").textContent = "You must agree to the Terms.";
+        valid = false;
+    }
 
-            if (!valid) {
-                event.preventDefault();
-            }
-        });
+    if (!valid) {
+        event.preventDefault();
+    }
+});
+            
     </script>
 
 </body>
