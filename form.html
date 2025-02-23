@@ -95,7 +95,7 @@
     <div class="container my-5">
         <div class="form-container">
             <h2 class="text-center" style="color: #337786;">Register Here</h2>
-            <form id="contactForm" action="processform.php" method="POST">
+            <form id="contactForm" action="processform.php" onsubmit="return invalid()" method="POST">
                 <div class="mb-3">
                     <label for="firstName" class="form-label">First Name *</label>
                     <input type="text" class="form-control" id="fname" name="fname" required>
@@ -133,6 +133,20 @@
                 <button type="submit" class="btn btn-submit" id="submitBtn">Subscribe</button>
             </form>
         </div>
+        <script>
+            function isvalid(){
+                var user=document.form.fname.value;
+                var user=document.form.lname.value;
+                var user=document.form.email.value;
+                var user=document.form.email.value;
+                if(fname.length=="" && lname==""&& email=="" && phone=="")
+                {
+                    alert("One or more field is empty!!")
+                    return false
+                }
+
+            }
+        </script>
     </div>
 
     <!-- Bootstrap JS -->
