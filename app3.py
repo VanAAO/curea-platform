@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import spacy
 from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
@@ -13,6 +13,11 @@ nlp = spacy.load("trained_nlp_model")
 
 # Initialize sentiment analyzer
 sentiment_analyzer = SentimentIntensityAnalyzer()
+
+# Serve the frontend
+@app.route("/")
+def home():
+    return render_template("ai-convo.html")
 
 # Define response mapping
 services = {
@@ -31,6 +36,7 @@ services = {
     "employment": {
         "name": "ABZWorks",
         "description": "Support for employment, education, and training.",
+        "phone": "0800 83 85 87",
         "website": "https://abzworks.co.uk/"
     }
 }
@@ -116,9 +122,16 @@ def generate_response(user_id, user_input):
     # Final step: Provide resources
     if session["step"] in [4, 5, 6]:
         services_list = [services[intent] for intent in session["intents"]]
+        print(services_list)
+
         response = "Here’s what I found for you:\n"
         for service in services_list:
-            response += f"📌 **{service['name']}**\n   {service['description']}\n   📞 {service['phone']}\n   🌍 [Visit Website]({service['website']})\n\n"
+            name = service.get('name', 'Unknown Service')
+            description = service.get('description', 'No description available')
+            phone = service.get('phone', 'No phone number available')
+            website = service.get('website', '#')
+                                      
+            response += f"📌 **{name}**\n   {description}\n   📞 {phone}\n   🌍 [Visit Website]({website})\n\n"
 
         session["step"] = 0  # Reset conversation
         return response
