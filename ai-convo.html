@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iMessage-style Chat with Flask API</title>
+    <title>AI powered Chat</title>
     <style>
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -47,7 +47,7 @@
       }
 
       .user-message {
-        background-color: #007aff;
+        background-color: #337786;
         color: white;
         align-self: flex-start;
         border-bottom-left-radius: 5px;
@@ -79,7 +79,7 @@
       button {
         padding: 12px 15px;
         font-size: 16px;
-        background-color: #007aff;
+        background-color: #337786;
         color: white;
         border: none;
         border-radius: 50%;
@@ -92,7 +92,7 @@
       }
 
       button:hover {
-        background-color: #0061c2;
+        background-color: #abd0f4;
       }
 
       .typing {
@@ -132,7 +132,8 @@
         const chatBox = document.getElementById("messages");
         const sendButton = document.getElementById("send-button");
 
-        sendButton.addEventListener("click", function () {
+        // Function to send the message
+        function sendMessage() {
           let userMessage = chatInput.value;
           if (!userMessage.trim()) return;
 
@@ -154,6 +155,19 @@
             .catch((error) => console.error("Error:", error));
 
           chatInput.value = "";
+        }
+
+        // Add event listener for the send button
+        sendButton.addEventListener("click", function () {
+          sendMessage();
+        });
+
+        // Add event listener for the Enter key press
+        chatInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault(); // Prevent the default Enter behavior (form submit)
+            sendMessage();
+          }
         });
 
         // Function to append messages
